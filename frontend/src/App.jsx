@@ -3,11 +3,10 @@ import axios from 'axios'
 import './App.css'
 
 function App() {
-  // 1. Pega o ano atual do computador (ex: 2025)
   const anoAtual = new Date().getFullYear()
 
   const [formData, setFormData] = useState({
-    ano: anoAtual, // 2. Começa já preenchido
+    ano: anoAtual,
     km: '',
     motor: '1.0', 
     marca: '1'    
@@ -38,13 +37,25 @@ function App() {
         marca: Number(formData.marca)
       })
       
-      setResultado(response.data)
+      if (response.data && response.data.valor_estimado) {
+        setResultado(response.data.valor_estimado)
+      } else {
+        setResultado(response.data)
+      }
+      
     } catch (error) {
       console.error("Erro:", error)
-      alert("Erro ao conectar. O servidor Azure pode estar 'dormindo'. Tente de novo em 30 segundos.")
+      alert("Erro ao conectar. Tente de novo.")
     } finally {
       setLoading(false)
     }
+  }
+
+  const formatarValor = (valor) => {
+    if (typeof valor === 'number') {
+      return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+    }
+    return valor 
   }
 
   return (
@@ -59,9 +70,7 @@ function App() {
             <label>Ano de Fabricação</label>
             <input 
               type="number" name="ano" placeholder="Ex: 2020" 
-              // 3. Validação: Impede anos absurdos
-              min="1990"
-              max={anoAtual + 1}
+              min="1990" max={anoAtual + 1}
               value={formData.ano} onChange={handleChange} required 
             />
           </div>
@@ -70,7 +79,6 @@ function App() {
             <label>Quilometragem (KM)</label>
             <input 
               type="number" name="km" placeholder="Ex: 50000" 
-              // 4. Validação: Impede negativo
               min="0"
               value={formData.km} onChange={handleChange} required 
             />
@@ -104,7 +112,7 @@ function App() {
         {resultado && (
           <div className="resultado">
             <h3>Valor de Mercado:</h3>
-            <h2 className="valor">{resultado}</h2>
+            <h2 className="valor">{formatarValor(resultado)}</h2>
           </div>
         )}
       </div>
