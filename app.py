@@ -20,23 +20,17 @@ def home():
 def results():
     data = request.get_json(force=True)
     
-    # Pegando os 4 dados enviados pelo Frontend
-    # Convertendo para float para garantir que o cálculo funcione
     ano = float(data['ano'])
     km = float(data['km'])
     motor = float(data['motor'])
-    marca = float(data['marca']) # 1, 2 ou 3
+    marca = float(data['marca'])
     
-    # Cria o array na MESMA ORDEM que foi treinado no model.py
     features = [np.array([ano, km, motor, marca])]
-    
-    # Faz a previsão
     prediction = model.predict(features)
     
-    # Formata para R$ bonito
-    resultado_formatado = f"R$ {prediction[0]:,.2f}"
-    
-    return jsonify(resultado_formatado)
+    return jsonify({
+        "valor_estimado": prediction[0]
+    })
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
