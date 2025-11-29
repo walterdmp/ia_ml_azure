@@ -1,0 +1,148 @@
+:root {
+  --bg-color: #121212;         /* Fundo quase preto */
+  --surface-color: #1e1e1e;    /* Cartão cinza escuro */
+  --primary-color: #6200ea;    /* Roxo moderno */
+  --accent-color: #03dac6;     /* Verde água para destaque */
+  --text-primary: #ffffff;     /* Texto branco puro */
+  --text-secondary: #b0b0b0;   /* Texto cinza claro */
+  --input-bg: #2c2c2c;         /* Fundo dos inputs */
+  --border-color: #444444;     /* Bordas sutis */
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px; /* Evita colar nas bordas no celular */
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  background-color: var(--surface-color);
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6); /* Sombra forte para profundidade */
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  border: 1px solid #333;
+}
+
+h1 {
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+p {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+.input-group {
+  margin-bottom: 1.2rem;
+  text-align: left;
+}
+
+label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Estilo moderno para Inputs e Selects */
+input, select {
+  width: 100%;
+  padding: 14px 16px;
+  background-color: var(--input-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* Efeito de brilho ao clicar */
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(98, 0, 234, 0.25);
+  background-color: #333;
+}
+
+/* Botão com gradiente */
+button {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, var(--primary-color), #3700b3);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(98, 0, 234, 0.4);
+}
+
+button:disabled {
+  background: #444;
+  color: #888;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Caixa de Resultado Destacada */
+.resultado {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: rgba(3, 218, 198, 0.1); /* Verde água transparente */
+  border-radius: 12px;
+  border: 1px solid rgba(3, 218, 198, 0.3);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.resultado h3 {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.valor {
+  color: var(--accent-color);
+  margin: 10px 0 0 0;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(3, 218, 198, 0.3);
+}
+
+/* Animação suave */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
